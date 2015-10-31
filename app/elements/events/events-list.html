@@ -2,7 +2,7 @@
 
 <dom-module id="events-list">
     <template>
-        <template is="dom-repeat" items="{{events}}" filter="matchesCategory" observe="label">>
+        <template is="dom-repeat" items="{{events}}" filter="matchesCategory" observe="category">
               <paper-material elevation="2">
                 <div>{{item.name}}</div>
                 <div>{{item.creator}}</div>
@@ -29,26 +29,28 @@
                         {
                             name: "Event Hackathon",
                             id:"1",
-                            creator:"AG",
-                            location:"BU",
-                            time:"10:00",
-                            usersGoing:["Adrian", "Habib"],
-                            label:"test"
+                            creator: "AG",
+                            location: "BU",
+                            time: "10:00",
+                            usersGoing: ["Adrian", "Habib"],
+                            category: "test"
                         },
                         {
                             name:"Event Sunday",
                             id:"2",
-                            creator:"Habib",
-                            location:"BU",
-                            time:"12:00",
-                            usersGoing:["Adrian", "Habib"],
-                            label:"test"
+                            creator: "Habib",
+                            location: "BU",
+                            time: "12:00",
+                            usersGoing: ["Adrian", "Habib"],
+                            category: "test"
                         }
                         ]
                 },
-                 matchesCategory: function(item) {
-                        return item.label == 'test';
+                matchesCategory: function(item) {
+                    return item.category == 'test';
                 }
+
+            });
         })();
 
     </script>

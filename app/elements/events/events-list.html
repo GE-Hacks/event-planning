@@ -2,10 +2,19 @@
 
 <dom-module id="events-list">
     <template>
-        <template is="dom-repeat" items="{{events}}">
-            <div>{{item.name}}</div>
+        <template is="dom-repeat" items="{{events}}" filter="matchesCategory" observe="label">>
+              <paper-material elevation="2">
+                <div>{{item.name}}</div>
+                <div>{{item.creator}}</div>
+                <div>{{item.location}}</div>
+                <div>{{item.time}}</div>
+                <template is="dom-repeat" items="{{item.usersGoing}}" as="users" index-as="user_no">
+                  <div><span>{{user_no}}</span>. 
+                       <span>{{users}}</span>
+                  </div>
+                </template>
+              </paper-material>
         </template>
-
     </template>
 
     <script>
@@ -18,18 +27,30 @@
                 ready: function() {
                     this.events= [
                         {
-                            name: "event1",
-                            id:"1"
+                            name: "Event Hackathon",
+                            id:"1",
+                            creator:"AG",
+                            location:"BU",
+                            time:"10:00",
+                            usersGoing:["Adrian", "Habib"],
+                            label:"test"
                         },
                         {
-                            name:"event2",
-                            id: "2"
+                            name:"Event Sunday",
+                            id:"2",
+                            creator:"Habib",
+                            location:"BU",
+                            time:"12:00",
+                            usersGoing:["Adrian", "Habib"],
+                            label:"test"
                         }
                         ]
+                },
+                 matchesCategory: function(item) {
+                        return item.label == 'test';
                 }
-
-            });
         })();
+
     </script>
 
 </dom-module>

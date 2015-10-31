@@ -116,10 +116,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div class="content">
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
              <section data-route="events">
-              <paper-material elevation="1">
-                <h2 class="page-title">Events</h2>
+               <h2 class="page-title">Events</h2>
+              <input is="iron-input" bind-value="{{eventFilter}}">
                <events-list></events-list>
-              </paper-material>
             </section>
 
           </iron-pages>

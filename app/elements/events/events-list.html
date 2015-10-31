@@ -1,13 +1,10 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+
 <dom-module id="events-list">
     <template>
-        <style include="shared-styles"></style>
-        <style>
-            :host {
-                display: block;
-            }
-        </style>
-        <label>this is a list of events test</label>
+        <template is="dom-repeat" items="{{events}}">
+            <div>{{item.name}}</div>
+        </template>
 
     </template>
 
@@ -18,13 +15,19 @@
             Polymer({
                 is: 'events-list',
 
-                properties: {
-                    events: {
-                        type: Array,
-                        value: [],
-                        notify: true
-                    }
+                ready: function() {
+                    this.events= [
+                        {
+                            name: "event1",
+                            id:"1"
+                        },
+                        {
+                            name:"event2",
+                            id: "2"
+                        }
+                        ]
                 }
+
             });
         })();
     </script>

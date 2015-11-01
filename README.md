@@ -1,4 +1,13 @@
-Welcome to Polymer Starter Kit Light!
+#Welcome to the GE Event Planner web app!
+
+This was built to help **GE employees** plan events such as *tech talks, social gatherings, outdoor sports, etc.* The range of categories is limitless and each event is sure to be exciting!
+
+###Technical Overview:
+- Front-end developed with Polymer
+- Back-end developed with Parse
+
+Authors:
+Habib Khan, Adrian Gonzalez, Mina Bebawy
 
 To begin, fire up a local server from inside the `app` directory. Please make sure to serve up the contents of the directory rather than root as routing will otherwise fail to correctly function.
 

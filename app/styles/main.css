@@ -22,3 +22,23 @@ paper-material {
 	padding: 10px
 }
 
+paper-button {
+	float: right;
+	background: #ff9821; /*@orange*/
+	color: #fff;
+	width: 50px;
+	border-radius: 100%;
+	text-align: center;
+	padding: 15px 0;
+	font-size: 20px;
+	margin-top: -90px;
+}
+
+paper-button:hover {
+	cursor: pointer;
+	background-color: #ffbb66; /*@orangeLight*/
+}
+
+paper-button:active {
+	background-color: #005cb9; /*@blue*/
+}

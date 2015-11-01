@@ -2,9 +2,8 @@
 
 <dom-module id="events-list">
     <template>
-        <input value="{{eventFilter::input}}">
-        <div><h3>{{eventFilter}}</h3></div>
-        <template is="dom-repeat" items="{{events}}" filter="matchesCategory" observe="category">
+        <input value="{{filterCategory::input}}">
+        <template id="resultList" is="dom-repeat" items="{{events}}" filter="matchesCategory" observe="category">
               <paper-material elevation="2">
                 <div>{{item.name}}</div>
                 <div>{{item.creator}}</div>
@@ -25,7 +24,12 @@
 
             Polymer({
                 is: 'events-list',
-
+                properties: {
+                    filterCategory: {
+                      value: '',
+                      observer: 'refreshFilter'          
+                    }
+                },
                 ready: function() {
                     this.events= [
                         {
@@ -57,11 +61,16 @@
                         }
                         ]
                 },
-                matchesCategory: function(item, category) {
+                
+                matchesCategory: function(item) {
                    console.log(item);
-                   console.log(category);
-                    if (!category) category = "party";
-                    return item.category ==  category
+                   //console.log(category);
+                    //if (!category) category = "party";
+                    return item.category.match(new RegExp(this.filterCategory, 'i'));
+                    //return item.category ==  category
+                },
+                refreshFilter: function() {
+                    this.$.resultList.render();
                 }
 
             });

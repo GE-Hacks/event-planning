@@ -12,3 +12,13 @@ body {
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #333;
 }
+
+input.events-list {
+	width: 250px;
+}
+
+paper-material {
+	margin-top: 15px;
+	padding: 10px
+}
+

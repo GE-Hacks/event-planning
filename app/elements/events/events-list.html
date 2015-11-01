@@ -2,20 +2,33 @@
 
 <dom-module id="events-list">
     <template>
-        <input value="{{filterCategory::input}}">
-        <template id="resultList" is="dom-repeat" items="{{events}}" filter="matchesCategory" observe="category">
-              <paper-material elevation="2">
-                <div>{{item.name}}</div>
-                <div>{{item.creator}}</div>
-                <div>{{item.location}}</div>
-                <div>{{item.time}}</div>
-                <template is="dom-repeat" items="{{item.usersGoing}}" as="users" index-as="user_no">
-                  <div><span>{{user_no}}</span>. 
-                       <span>{{users}}</span>
-                  </div>
-                </template>
-              </paper-material>
-        </template>
+        <paper-button on-click="">+</paper-button>
+        <!-- This should be made into a pop up menu that comes up whenever the + button is clicked -->
+        <div>
+            <input value="{{createEventName::input}}" placeholder="Event Name">
+            <input value="{{createOrganizerName::input}}" placeholder="Organizer Name">
+            <input value="{{createLocation::input}}" placeholder="Location">
+            <input value="{{createTime::input}}" placeholder="Time">
+            <input value="{{createCategory::input}}" placeholder="Category">
+            <button on-click="onCreate">Create Event!</button>
+        </div>
+        <!-- Below is what generates the events that match the filter -->
+        <div>
+            <input value="{{filterCategory::input}}" placeholder="Filter by category">
+            <template id="resultList" is="dom-repeat" items="{{events}}" filter="matchesCategory" observe="category">
+                  <paper-material elevation="2">
+                    <div>{{item.name}}</div>
+                    <div>{{item.creator}}</div>
+                    <div>{{item.location}}</div>
+                    <div>{{item.time}}</div>
+                    <template is="dom-repeat" items="{{item.usersGoing}}" as="users" index-as="user_no">
+                      <div><span>{{user_no}}</span>. 
+                           <span>{{users}}</span>
+                      </div>
+                    </template>
+                  </paper-material>
+            </template>
+        </div>
     </template>
 
     <script>
@@ -28,7 +41,12 @@
                     filterCategory: {
                       value: '',
                       observer: 'refreshFilter'          
-                    }
+                    },
+                    createEventName: String,
+                    createOrganizerName: String,
+                    createLocation: String,
+                    createTime: String,
+                    createCategory: String
                 },
                 ready: function() {
                     this.events= [
@@ -59,20 +77,33 @@
                             usersGoing: ["Adrian", "Habib"],
                             category: "party"
                         }
-                        ]
-                },
-                
+                        ];
+                     this.notifyPath('events', this.events);
+                     console.log(this.events);
+                },           
+                onCreate: function() {
+                    var eventCreated = {
+                        name: this.createEventName,
+                        id: String(Math.floor((Math.random() * 1000) + 1)),
+                        creator: this.createOrganizerName,
+                        location: this.createLocation,
+                        time: this.createTime,
+                        usersGoing: [],
+                        category: this.createCategory
+                    }
+                    this.events.push(eventCreated);
+                    console.log("Added event");
+                    console.log(this.events);
+                     this.notifyPath('events', this.events.slice());
+                    this.$.resultList.render();
+                },    
                 matchesCategory: function(item) {
                    console.log(item);
-                   //console.log(category);
-                    //if (!category) category = "party";
                     return item.category.match(new RegExp(this.filterCategory, 'i'));
-                    //return item.category ==  category
                 },
                 refreshFilter: function() {
                     this.$.resultList.render();
                 }
-
             });
         })();
 

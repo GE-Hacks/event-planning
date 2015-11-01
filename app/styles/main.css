@@ -21,7 +21,11 @@ paper-material {
 	margin-top: 15px;
 	padding: 10px
 }
-
+paper-input-container {
+	padding: 15px 0;
+	font-size: 14px;
+	display: block;
+}
 paper-button {
 	float: right;
 	background: #ff9821; /*@orange*/

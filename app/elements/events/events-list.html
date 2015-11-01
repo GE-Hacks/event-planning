@@ -2,6 +2,8 @@
 
 <dom-module id="events-list">
     <template>
+        <input value="{{eventFilter::input}}">
+        <div><h3>{{eventFilter}}</h3></div>
         <template is="dom-repeat" items="{{events}}" filter="matchesCategory" observe="category">
               <paper-material elevation="2">
                 <div>{{item.name}}</div>
@@ -43,11 +45,23 @@
                             time: "12:00",
                             usersGoing: ["Adrian", "Habib"],
                             category: "test"
+                        },
+                         {
+                            name:"Party Time at the North Pole",
+                            id:"3",
+                            creator: "Pauuu",
+                            location: "North Pole",
+                            time: "3:00",
+                            usersGoing: ["Adrian", "Habib"],
+                            category: "party"
                         }
                         ]
                 },
-                matchesCategory: function(item) {
-                    return item.category == 'test';
+                matchesCategory: function(item, category) {
+                   console.log(item);
+                   console.log(category);
+                    if (!category) category = "party";
+                    return item.category ==  category
                 }
 
             });
